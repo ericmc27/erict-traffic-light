@@ -3,14 +3,14 @@ import React, {useEffect, useState} from "react";
 const TrafficLight = () => {
 	const [color, setActiveColor] = useState(null);
 	const colors = ["red", "yellow", "green"]
+	let currentIndex;
 
 	const handleClick = (color)=>{
 		setActiveColor(color);
 	}
 
 	const handleLightCycle = ()=>{
-		let currentIndex = colors.indexOf(color);
-		currentIndex = currentIndex ? currentIndex : -1
+		currentIndex = colors.indexOf(color);
 		const nextColor = (currentIndex + 1) % colors.length
 		setActiveColor(colors[nextColor])
 	}
@@ -21,6 +21,7 @@ const TrafficLight = () => {
 			interval = setInterval(handleLightCycle, 1000);
 			return () => clearInterval(interval);
 		}
+		
 	}, [color])
 
 	return (
